@@ -47,7 +47,10 @@
 				.then(res => {
 					this.film = res.data
 					this.getCharacters()
-				})
+			        this.$store.dispatch('setError', null)
+                }).catch((error) => {
+                    this.$store.dispatch('setError', 'Something went wrong!')
+                })
 		},
 		methods: {
 			getCharacters(){
@@ -55,8 +58,10 @@
 					this.axios.get(character)
 						.then(res => {
 							this.characters.push(res.data)
-							console.log(this.characters)
-						})
+						  this.$store.dispatch('setError', null)
+                        }).catch((error) => {
+                            this.$store.dispatch('setError', 'Something went wrong!')
+                        })
 				})
 			}
 		}
